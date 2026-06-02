@@ -1,0 +1,37 @@
+# Xcode
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+DerivedData/
+*.hmap
+*.ipa
+*.xcarchive
+*.dSYM.zip
+*.dSYM
+
+# Build
+build/
+.build/
+
+# CocoaPods
+Pods/
+*.xcworkspace
+
+# Swift Package Manager
+.swiftpm/
+.package.resolved
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Secrets (never commit these)
+*.env
+Secrets.swift
