@@ -111,7 +111,6 @@ The app compiles and runs without the SDK — Spotify features activate automati
 
 ## Context
 
-Built as a personal project during the iOS Mobile Development module at CESAE Digital.  
 It started as a clock. It became a study in SwiftUI layout, audio sessions, and third-party SDK integration.
 
 _The screen no longer locks itself. That alone was worth it._
