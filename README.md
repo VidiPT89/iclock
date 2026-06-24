@@ -1,122 +1,63 @@
-# 🕐 iClock
+# 🕐 iClock — Stylish Clock for iOS
 
-> A clock should feel like a clock. Not a notification tray with a time somewhere in the corner.
+> A SwiftUI clock app with four display styles and music integration.
 
-A SwiftUI clock app for iOS with four distinct display styles, music playback controls, and a screen that stays on — because a clock that locks itself isn't much of a clock.
+Choose between 7-Segment (retro LED), Flip, Dot Matrix and Analog clock faces. Customise colour themes, switch between English and Portuguese, and control your music directly from the Now Playing bar — with Spotify and Apple Music support.
 
----
+## 📦 What's Inside
 
-## What's inside
+- 🔢 Four clock styles — 7-Segment, Flip, Dot Matrix, Analog
+- 🎨 Customisable colour themes
+- 🌐 Bilingual support (English / Portuguese)
+- 🎵 Now Playing bar with artwork and playback controls
+- 🟢 Spotify integration via App Remote SDK
+- 🍎 Apple Music fallback via MPNowPlayingInfoCenter
+- 🔅 Auto-brightness dimming
+- 🔒 Screen auto-lock disabled while active
 
-- Four clock styles: 7-Segment (retro LED), Flip, Dot Matrix, and Analog
-- Colour themes to match your mood or setup
-- English and Portuguese language support
-- Now Playing bar with artwork, track title, artist, and playback controls
-- Full Spotify App Remote SDK integration — connect, play, pause, skip
-- Apple Music / system player fallback via `MPNowPlayingInfoCenter`
-- Auto-brightness dim when the app is in focus — easy on the eyes in the dark
-- Screen auto-lock disabled while the app is open
-- GitHub shortcut in the customiser panel, because why not
+## 🛠️ Tech Stack
 
----
+![SwiftUI](https://img.shields.io/badge/SwiftUI-007AFF?style=flat&logo=swift&logoColor=white)
+![AVFoundation](https://img.shields.io/badge/AVFoundation-000000?style=flat&logo=apple&logoColor=white)
+![Combine](https://img.shields.io/badge/Combine-007AFF?style=flat&logo=apple&logoColor=white)
+![Spotify SDK](https://img.shields.io/badge/Spotify_SDK-1DB954?style=flat&logo=spotify&logoColor=white)
 
-## Tech Stack
-
-`SwiftUI` | `AVFoundation` | `MediaPlayer` | `Combine` | `SpotifyiOS SDK` | `UIKit`
-
----
-
-## Architecture
+## 🏗️ Architecture
 
 ```
-iClock
-├── ClockView          →  main view, all four clock faces, customiser panel
-├── ClockModel         →  time ticking, date string, daily phrase
-├── NowPlayingManager  →  music detection, playback controls, AVAudioSession
-├── SpotifyManager     →  Spotify App Remote SDK, OAuth callback, player state
-├── LanguageManager    →  English / Portuguese toggle with AppStorage
-├── SplashView         →  launch screen with credits and GitHub link
-└── Clock styles
-    ├── SevenSegmentView   →  LED digit renderer with scanlines overlay
-    ├── FlipClockView      →  split-flap digit animation
-    ├── DotMatrixView      →  5×7 dot matrix LED grid
-    └── AnalogClockView    →  hands with smooth second movement
+├── ClockView               # Main clock container
+├── ClockModel              # Clock state and logic
+├── Clock Styles/
+│   ├── SevenSegmentView
+│   ├── FlipClockView
+│   ├── DotMatrixView
+│   └── AnalogClockView
+├── NowPlayingManager       # Music playback info
+├── SpotifyManager          # Spotify App Remote SDK
+├── LanguageManager         # EN/PT localisation
+└── SplashView              # Launch screen
 ```
 
----
-
-## Screens
-
-| Screen | Description |
-|--------|-------------|
-| 🟠 7-Segment | Retro LED display with scanline effect and glow |
-| 🔄 Flip | Split-flap style with per-digit animation |
-| 🔵 Dot Matrix | 5×7 LED grid — compact and clean |
-| ⏱️ Analog | Classic hands with smooth sweep |
-| 🎵 Now Playing | Slides up when music is detected — Spotify or Apple Music |
-| 🎨 Customiser | Style, colour theme, and language picker |
-
----
-
-## Spotify Integration
-
-iClock uses the **Spotify App Remote SDK** for full playback control when Spotify is running:
-
-- Connect button appears automatically when the SDK is present and Spotify is not linked
-- Once connected: artwork, track title, artist, play/pause, and skip are all live
-- When Spotify is not connected, the app falls back to the iOS system player via `MPNowPlayingInfoCenter`
-
-> Requires a free Spotify Developer account and a registered redirect URI (`iclock://spotify-callback`).
-
----
-
-## Requirements
-
-- iOS 16+
-- Xcode 15+
-- Spotify account (optional — only needed for Spotify controls)
-
----
-
-## Getting Started
+## 🚀 How to Run
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/VidiPT89/iclock.git
+
+# 2. Open in Xcode
+open iclock.xcodeproj
+
+# 3. (Optional) Configure Spotify SDK credentials
+
+# 4. Build & run on a device or simulator (iOS 16+)
 ```
 
-1. Open `iClock.xcodeproj` in Xcode
-2. Select your target device or simulator (iOS 16+)
-3. Build and run
+## 📝 Notes
 
-**Optional — Spotify support:**
-
-1. Create an app at [developer.spotify.com](https://developer.spotify.com)
-2. Add `iclock://spotify-callback` as a Redirect URI
-3. Download `SpotifyiOS.xcframework` from the [Spotify iOS SDK releases](https://github.com/spotify/ios-sdk/releases)
-4. Drag the `.xcframework` into the Xcode project (target → Frameworks)
-5. Replace the Client ID in `SpotifyManager.swift`
-
-The app compiles and runs without the SDK — Spotify features activate automatically when the framework is present.
+- Requires iOS 16.0 or later
+- Spotify features require the Spotify app installed on the device
+- Apple Music works as a fallback without additional setup
 
 ---
 
-## Honest notes
-
-- This started as a simple clock and somehow grew a full music player. No regrets.
-- The auto-brightness dim uses `UIScreen.main.brightness`, which Apple keeps threatening to deprecate. It works for now.
-- The `AVAudioSession` interrupt trick for pausing non-Spotify players is a bit of a hack. It works. It feels wrong. It stays.
-- Layout calculations are manual (`GeometryReader` + explicit widths) because SwiftUI's automatic sizing disagreed with the design vision more than once.
-
----
-
-## Context
-
-It started as a clock. It became a study in SwiftUI layout, audio sessions, and third-party SDK integration.
-
-_The screen no longer locks itself. That alone was worth it._
-
----
-
-<div align="center">
-  <sub>developed by <a href="https://github.com/VidiPT89">David Arsénio Martins</a></sub>
-</div>
+Developed by **David Martins**
